@@ -1,0 +1,33 @@
+# ===========================
+# API Gateway
+# ===========================
+
+/api-gateway/node_modules
+/api-gateway/.env
+/api-gateway/dist
+/api-gateway/logs
+/api-gateway/coverage
+/api-gateway/tmp
+/api-gateway/*.log
+/api-gateway/.DS_Stor
+# ===========================
+# Identity Service
+# ===========================
+
+/identity-service/node_modules
+/identity-service/.env
+/identity-service/dist
+/identity-service/logs
+/identity-service/coverage
+/identity-service/tmp
+/identity-service/*.log
+/identity-service/.DS_Store
+
+# ===========================
+# OS / System Files
+# ===========================
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
