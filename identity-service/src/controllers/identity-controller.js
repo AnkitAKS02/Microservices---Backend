@@ -65,14 +65,12 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      logger.warn("Invalid user");
+      logger.warn("Invalid user - User dosent exist in the database");
       return res.status(400).json({
         success: false,
         message: "Invalid credentials",
       });
     }
-
-    // user valid password or not
     const isValidPassword = await user.comparePassword(password);
     if (!isValidPassword) {
       logger.warn("Invalid password");
