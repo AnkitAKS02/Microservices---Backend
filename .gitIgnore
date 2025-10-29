@@ -13,7 +13,6 @@
 # ===========================
 # Identity Service
 # ===========================
-
 /identity-service/node_modules
 /identity-service/.env
 /identity-service/dist
@@ -22,6 +21,19 @@
 /identity-service/tmp
 /identity-service/*.log
 /identity-service/.DS_Store
+# ===========================
+#Post Service
+# ===========================
+/post-service/node_modules
+/post-service/.env
+/post-service/dist
+/post-service/logs
+/post-service/coverage
+/post-service/tmp
+/post-service/*.log
+/post-service/.DS_Store
+
+
 
 # ===========================
 # OS / System Files

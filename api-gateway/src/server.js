@@ -62,25 +62,29 @@ app.use('/v1/auth', proxy(process.env.IDENTITY_SERVICE_URL, {
     },
     userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
         logger.info(
+            `Response received from post service: ${proxyRes.statusCode}`
+        );
+        return proxyResData;
+    },
+})
+);
+
+app.use('/v1/posts',validateToken, proxy(process.env.PROCESS_SERVICE_URL, {
+    ...proxyOptions,
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers["Content-Type"] = "application/json";
+        proxyReqOpts.headers["user-id"] = srcReq.user.userId;
+        return proxyReqOpts;
+    },
+    userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+        logger.info(
             `Response received from Identity service: ${proxyRes.statusCode}`
         );
         return proxyResData;
     },
 })
 );
-// app.use(
-//   "/v1/auth",
-//   proxy(process.env.IDENTITY_SERVICE_URL, {
-//     proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
-//       proxyReqOpts.headers["Content-Type"] = "application/json";
-//       return proxyReqOpts;
-//     },
-//     userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
-//       logger.info(`Response received from Identity service: ${proxyRes.statusCode}`);
-//       return proxyResData;
-//     },
-//   })
-// );
+
 
 //now validate token will be used at every other services that will be created later on:
 app.use(errorHandler);
