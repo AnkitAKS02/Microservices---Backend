@@ -33,6 +33,18 @@
 /post-service/*.log
 /post-service/.DS_Store
 
+# ===========================
+#Media Service
+# ===========================
+/media-service/node_modules
+/media-service/.env
+/media-service/dist
+/media-service/logs
+/media-service/coverage
+/media-service/tmp
+/media-service/*.log
+/media-service/.DS_Store
+
 
 
 # ===========================

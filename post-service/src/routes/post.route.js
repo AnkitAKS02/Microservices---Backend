@@ -17,4 +17,4 @@ router.get("/all-posts", getAllPosts);
 router.get("/:id", getPost);
 router.delete("/:id", deletePost);
 
-module.exports = router;
+export default router;

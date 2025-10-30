@@ -1,6 +1,5 @@
 import Post from "../models/post.models.js";
 import logger from "../utils/logger.js";
-import { publishEvent } from "../utils/rabbitmq.js";
 import { validateCreatePost } from "../utils/validation.js";
 
 async function invalidatePostCache(req, input) {
@@ -33,13 +32,6 @@ const createPost = async (req, res) => {
     });
 
     await newlyCreatedPost.save();
-
-    await publishEvent("post.created", {
-      postId: newlyCreatedPost._id.toString(),
-      userId: newlyCreatedPost.user.toString(),
-      content: newlyCreatedPost.content,
-      createdAt: newlyCreatedPost.createdAt,
-    });
 
     await invalidatePostCache(req, newlyCreatedPost._id.toString());
     logger.info("Post created successfully", newlyCreatedPost);
@@ -144,13 +136,6 @@ const deletePost = async (req, res) => {
         success: false,
       });
     }
-
-    //publish post delete method ->
-    await publishEvent("post.deleted", {
-      postId: post._id.toString(),
-      userId: req.user.userId,
-      mediaIds: post.mediaIds,
-    });
 
     await invalidatePostCache(req, req.params.id);
     res.json({
